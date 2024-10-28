@@ -24,7 +24,26 @@ namespace BasicCalculator
 
     }
 
-    private void button1_Click(object sender, EventArgs e)
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            if (isOperatorClicked)
+            {
+                txtDisplay.Text = "0";
+                isOperatorClicked = false;
+            }
+            else
+            {
+                txtDisplay.Text += "0";
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
             if (isOperatorClicked)
             {
@@ -35,28 +54,6 @@ namespace BasicCalculator
             {
                 txtDisplay.Text += "1";
             }
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void add_Click(object sender, EventArgs e)
-        {
-
-            if (double.TryParse(txtDisplay.Text, out firstOperand))
-            {
-                currentOperator = "+";
-                isOperatorClicked = true;
-            }
-            else
-            {
-                // Handle the error, maybe clear the text or show an error message
-                txtDisplay.Text = "0";
-            }
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -190,9 +187,26 @@ namespace BasicCalculator
             }
         }
 
+        private void add_Click(object sender, EventArgs e)
+        {
+
+            if (double.TryParse(txtDisplay.Text, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.CurrentCulture, out firstOperand))
+            {
+                currentOperator = "+";
+                isOperatorClicked = true;
+            }
+            else
+            {
+                // Handle the error, maybe clear the text or show an error message
+                txtDisplay.Text = "0";
+            }
+
+
+        }
+
         private void substract_Click(object sender, EventArgs e)
         {
-            if (double.TryParse(txtDisplay.Text, out firstOperand))
+            if (double.TryParse(txtDisplay.Text, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.CurrentCulture, out firstOperand))
             {
                 currentOperator = "-";
                 isOperatorClicked = true;
@@ -206,7 +220,7 @@ namespace BasicCalculator
 
         private void divide_Click(object sender, EventArgs e)
         {
-            if (double.TryParse(txtDisplay.Text, out firstOperand))
+            if (double.TryParse(txtDisplay.Text, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.CurrentCulture, out firstOperand))
             {
                 currentOperator = "/";
                 isOperatorClicked = true;
@@ -220,7 +234,7 @@ namespace BasicCalculator
 
         private void multiply_Click(object sender, EventArgs e)
         {
-            if (double.TryParse(txtDisplay.Text, out firstOperand))
+            if (double.TryParse(txtDisplay.Text, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.CurrentCulture, out firstOperand))
             {
                 currentOperator = "*";
                 isOperatorClicked = true;
@@ -231,20 +245,6 @@ namespace BasicCalculator
                 txtDisplay.Text = "0";
             }
         }
-
-        private void button0_Click(object sender, EventArgs e)
-        {
-            if (isOperatorClicked)
-            {
-                txtDisplay.Text = "0";
-                isOperatorClicked = false;
-            }
-            else
-            {
-                txtDisplay.Text += "0";
-            }
-        }
-
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -322,7 +322,16 @@ namespace BasicCalculator
                     result.PerformClick();
                     txtDisplay.Focus();
                     break;
-                
+                case Keys.Decimal:
+                case Keys.OemPeriod:
+                    btnDecimal.PerformClick();
+                    txtDisplay.Focus();
+                    break;
+                case Keys.Back:
+                    btnClear.PerformClick();
+                    txtDisplay.Focus();
+                    break;
+
             }
             // To prevent the default behavior (like a button gaining focus)
             e.Handled = true;
@@ -339,15 +348,14 @@ namespace BasicCalculator
 
         private void btnDecimal_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtDisplay.Text))
+            // Check if the display already contains a decimal separator
+            if (!txtDisplay.Text.Contains(System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator))
             {
-                txtDisplay.Text = "0.";
-            }
-            else if (!txtDisplay.Text.Contains("."))
-            {
-                txtDisplay.Text += ".";
+                // Add the correct decimal separator based on the current culture
+                txtDisplay.Text += System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
             }
         }
+
 
 
     }
