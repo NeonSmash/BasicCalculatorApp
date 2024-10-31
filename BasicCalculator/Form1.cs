@@ -30,135 +30,24 @@ namespace BasicCalculator
 
         }
 
-        private void button0_Click(object sender, EventArgs e)
+        private void NumberButton_Click(object sender, EventArgs e)
         {
+            // Cast sender to Button to identify the clicked button
+            Button button = sender as Button;
+            string number = button.Text;  // This gets the text (e.g., "0") of the button
+
+            // Check if an operator was clicked to reset the display
             if (isOperatorClicked)
             {
-                txtDisplay.Text = "0";
+                txtDisplay.Text = number;  // Set the display to the number clicked
                 isOperatorClicked = false;
             }
             else
             {
-                txtDisplay.Text += "0";
+                txtDisplay.Text += number;  // Append the number to the display
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (isOperatorClicked)
-            {
-                txtDisplay.Text = "1";
-                isOperatorClicked = false;
-            }
-            else
-            {
-                txtDisplay.Text += "1";
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if (isOperatorClicked)
-            {
-                txtDisplay.Text = "2";
-                isOperatorClicked = false;
-            }
-            else
-            {
-                txtDisplay.Text += "2";
-            }
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (isOperatorClicked)
-            {
-                txtDisplay.Text = "3";
-                isOperatorClicked = false;
-            }
-            else
-            {
-                txtDisplay.Text += "3";
-            }
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            if (isOperatorClicked)
-            {
-                txtDisplay.Text = "4";
-                isOperatorClicked = false;
-            }
-            else
-            {
-                txtDisplay.Text += "4";
-            }
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            if (isOperatorClicked)
-            {
-                txtDisplay.Text = "5";
-                isOperatorClicked = false;
-            }
-            else
-            {
-                txtDisplay.Text += "5";
-            }
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            if (isOperatorClicked)
-            {
-                txtDisplay.Text = "6";
-                isOperatorClicked = false;
-            }
-            else
-            {
-                txtDisplay.Text += "6";
-            }
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            if (isOperatorClicked)
-            {
-                txtDisplay.Text = "7";
-                isOperatorClicked = false;
-            }
-            else
-            {
-                txtDisplay.Text += "7";
-            }
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            if (isOperatorClicked)
-            {
-                txtDisplay.Text = "8";
-                isOperatorClicked = false;
-            }
-            else
-            {
-                txtDisplay.Text += "8";
-            }
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            if (isOperatorClicked)
-            {
-                txtDisplay.Text = "9";
-                isOperatorClicked = false;
-            }
-            else
-            {
-                txtDisplay.Text += "9";
-            }
-        }
 
         private void result_Click(object sender, EventArgs e)
         {
